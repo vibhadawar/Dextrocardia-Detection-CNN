@@ -1,4 +1,4 @@
-*** Dextrocardia Detection using Deep Learning***
+**Dextrocardia Detection using Deep Learning**
 
  **Project Overview**
 
@@ -12,7 +12,7 @@ This project uses a Convolutional Neural Network (CNN) to detect Dextrocardia (a
 
 4.Deployed with Flask + Ngrok for testing on Google Colab
 
-⚙Features
+**Features**
 
 ->Image preprocessing (resizing, grayscale conversion, normalization)
 
@@ -24,7 +24,7 @@ This project uses a Convolutional Neural Network (CNN) to detect Dextrocardia (a
 
 ->Flask-based web app to upload & predict X-ray images
 
-* Tech Stack / Libraries
+**Tech Stack / Libraries**
 
 NumPy, Pandas → Data handling
 
@@ -36,7 +36,7 @@ scikit-learn → Evaluation metrics
 
 Flask, flask-ngrok → Web deployment
 
-* Project Workflow
+**Project Workflow**
 
 Data Preprocessing → Load and prepare X-ray images
 
@@ -48,7 +48,7 @@ Evaluation → Accuracy, classification report, confusion matrix
 
 Deployment → Flask app (with ngrok for Colab testing)
 
-📊 Results
+**Results**
 
 Accuracy: 90%
 
