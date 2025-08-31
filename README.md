@@ -5,8 +5,11 @@
 This project uses a Convolutional Neural Network (CNN) to detect Dextrocardia (a rare heart condition where the heart is positioned on the right side of the chest) from chest X-ray images.
 
 1.Built using TensorFlow/Keras
+
 2. Preprocessed medical image dataset
+ 
 3.Evaluated using accuracy, precision, recall, F1-score
+
 4.Deployed with Flask + Ngrok for testing on Google Colab
 
 ⚙Features
