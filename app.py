@@ -1,36 +1,27 @@
-
 import streamlit as st
 import numpy as np
+import cv2
 from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
-from PIL import Image
 
-# Load trained model
-MODEL_PATH = "dextro_model.h5"   # make sure model is in same folder
-model = load_model(MODEL_PATH)
+# Load model
+model = load_model('dextro_model.h5')
 
+st.title("Dextrocardia Detection App")
 
-st.title("🫀 Dextrocardia Detection using CNN")
-st.write("Upload a chest X-ray image to detect whether it is **Normal** or **Dextrocardia**.")
-
-
-uploaded_file = st.file_uploader("Choose an X-ray image...", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Upload X-Ray Image", type=["jpg", "png", "jpeg"])
 
 if uploaded_file is not None:
-   
-    img = Image.open(uploaded_file).convert("L")  # Convert to grayscale
-    st.image(img, caption="Uploaded Image", use_column_width=True)
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    img = cv2.imdecode(file_bytes, cv2.IMREAD_GRAYSCALE)
+    img_resized = cv2.resize(img, (128, 128)) / 255.0
+    img_input = img_resized.reshape(1, 128, 128, 1)
 
-  
-    img = img.resize((128,128))
-    img_array = image.img_to_array(img) / 255.0
-    img_array = np.expand_dims(img_array, axis=0)  # shape: (1,128,128,1)
+    st.image(img_resized, caption="Uploaded Image", use_column_width=True)
 
-    pred = model.predict(img_array)
-    label = "Dextrocardia 🫀" if np.argmax(pred) == 1 else "Normal ✅"
-    confidence = np.max(pred) * 100
+    prediction = model.predict(img_input)
+    class_idx = np.argmax(prediction)
+    classes = ["Normal", "Dextrocardia"]
 
-  
-    st.subheader(f"Prediction: {label}")
-    st.write(f"Confidence: {confidence:.2f}%")
+    st.write(f"Prediction: **{classes[class_idx]}**")
+
 
